@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Reserve seu lugar no ônibus</h1>
+    <main>
+      <div class="onibus"></div>
+
+      <div class="reservar"></div>
+    </main>
+
+    <script>
+      const onibus = document.querySelector(".onibus");
+      let nLugares = +prompt("Quantos lugares tem o ônibus?");
+      let ondeComeca = +prompt("Onde comecar?");
+
+      function reservar(nLugar) {
+        const poltronas = document.querySelectorAll(".lugar");
+        const poltrona = poltronas[nLugar];
+
+        poltrona.classList.add("reservado");
+      }
+
+      function selecionarLugar(nLugar) {
+        const poltronas = document.querySelectorAll(".lugar");
+        const poltrona = poltronas[nLugar];
+
+        poltronas.forEach((poltrona) => {
+          poltrona.classList.remove("selecionado");
+        });
+
+        poltrona.classList.add("selecionado");
+
+        const reservar = document.getElementsByClassName("reservar")[0];
+        reservar.classList.add("selecionado");
+        reservar.innerHTML = `<p>Lugar selecionado:   ${
+          nLugar + 1
+        } </p> <button class="reservar_button" onclick="reservar(${nLugar})">Reservar</button>`;
+      }
+
+      for (let i = 0; i < ondeComeca - 1; i++) {
+        onibus.innerHTML += `<div></div>`;
+      }
+
+      for (let i = 0; i <= nLugares; i++) {
+        onibus.innerHTML += `<div onclick="selecionarLugar(${i})" class="lugar livre">${
+          i + 1
+        }</div>`;
+      }
+    </script>
+  </body>
+</html>
